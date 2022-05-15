@@ -4,7 +4,7 @@ export const Container = ({ children }) => {
   const [firstchild, lastchild] = children;
 
   return (
-    <div className="grid grid-cols-12 page-wrapper">
+    <div className="lg:grid grid-cols-12 page-wrapper">
       {firstchild}
       {lastchild}
     </div>

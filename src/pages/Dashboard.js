@@ -41,8 +41,8 @@ const Dashboard = () => {
       <Container>
         <Aside />
         <Main>
-          <div className="grid grid-cols-12 gap-3">
-            <div className="col-span-6">
+          <div className="md:grid grid-cols-12 gap-3">
+            <div className="col-span-6 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   total daily expenses
@@ -68,11 +68,11 @@ const Dashboard = () => {
 
                 {/* overlay graph */}
                 <div className="absolute bottom-0 right-0">
-                  <img src={graph1} alt="" />
+                  <img src={graph1} alt="" className=" opacity-30" />
                 </div>
               </div>
             </div>
-            <div className="col-span-6">
+            <div className="col-span-6 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   weekly earnings
@@ -102,7 +102,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-6">
+            <div className="col-span-6 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   Monthly expenses
@@ -132,7 +132,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-6">
+            <div className="col-span-6 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   Yearly Savings
@@ -162,7 +162,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-start-1 col-end-6">
+            <div className="col-span-6 lg:col-start-1 lg:col-end-6 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   total number of registered users
@@ -189,7 +189,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-start-6 col-end-11">
+            <div className=" col-span-6  lg:col-start-6 lg:col-end-11 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   total number of suspended users
@@ -216,7 +216,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-start-11 col-end-13">
+            <div className="col-span-6 lg:col-start-11 lg:col-end-13 mb-4 md:mb-0">
               <div className="bg-white px-8  py-4 relative text-center">
                 <h3 className="font-semibold text-tertiary uppercase mb-10">
                   admin profile

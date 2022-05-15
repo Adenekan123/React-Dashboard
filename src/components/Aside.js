@@ -1,11 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const Aside = () => {
+  const { isOpen } = useSelector((store) => store.menu);
   return (
-    <div className="col-span-2">
-      <ul className="bg-primary text-secondary px-12 py-8 h-full sticky top-0">
-        <li className="mb-6">
+    <div className={`col-span-2 ${isOpen ? "block" : "hidden"}  md:block`}>
+      <ul className="bg-primary text-secondary px-4 lg:px-8 py-8 md:py-3 lg:py-8 h-full sticky top-0 md:flex md:items-center lg:items-start md:justify-center lg:justify-start gap-7 lg:block ">
+        <li className="mb-6 md:mb-0 lg:mb-6">
           <Link className="dropdown flex items-center" to="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +25,7 @@ export const Aside = () => {
             <span>Dashboard</span>
           </Link>
         </li>
-        <li className="mb-6">
+        <li className="mb-6 md:mb-0 lg:mb-6">
           <Link className="dropdown flex items-center" to="/users">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +43,7 @@ export const Aside = () => {
             <span>Users</span>
           </Link>
         </li>
-        <li className="mb-6">
+        <li className="mb-6 md:mb-0 lg:mb-6">
           <Link className="flex" to="/profile">
             <svg
               xmlns="http://www.w3.org/2000/svg"

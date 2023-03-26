@@ -152,7 +152,7 @@ export const updatePost = (postId, updatedData) => async (dispatch) => {
     const response = await fetch(
       `https://dorfville.cyclic.app/posts/${postId}`,
       {
-        method: "PUT",
+        method: "POST",
         body: JSON.stringify(updatedData),
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-const URL = "http://localhost:5000/auth";
+const URL = "https://dorfville.cyclic.app/auth";
 
 //register
 const register = async (user) => {

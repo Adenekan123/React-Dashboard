@@ -42,7 +42,7 @@ export const { loginStart, loginSuccess, loginFailure, logoutSuccess } =
 export const login = (credentials) => async (dispatch) => {
   dispatch(loginStart());
   try {
-    const response = await fetch(`http://localhost:5000/auth/login`, {
+    const response = await fetch(`https://dorfville.cyclic.app/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const login = (credentials) => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
   try {
-    await fetch(`http://localhost:5000/auth/logout`, {
+    await fetch(`https://dorfville.cyclic.app/auth/logout`, {
       headers: {
         "Content-Type": "application/json",
       },

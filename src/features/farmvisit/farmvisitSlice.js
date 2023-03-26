@@ -140,6 +140,7 @@ export const deleteFarmvisit = (visitid) => async (dispatch) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
       }
     );
     const result = await response.json();

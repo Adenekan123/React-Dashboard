@@ -75,6 +75,7 @@ export const deleteCareer = (careerid) => async (dispatch) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
       }
     );
     const result = await response.json();

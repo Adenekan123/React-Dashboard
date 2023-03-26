@@ -49,7 +49,7 @@ export const fetchCareers = () => async (dispatch) => {
   dispatch(getCareersStart());
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch("http://localhost:5000/career", {
+    const response = await fetch("https://dorfville.cyclic.app/career", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -67,13 +67,16 @@ export const fetchCareers = () => async (dispatch) => {
 export const deleteCareer = (careerid) => async (dispatch) => {
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch(`http://localhost:5000/careers/${careerid}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `https://dorfville.cyclic.app/careers/${careerid}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const result = await response.json();
     dispatch(deleteCareersSuccess(result));
   } catch (error) {

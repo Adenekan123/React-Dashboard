@@ -64,7 +64,7 @@ export const fetchFarmvisits = () => async (dispatch) => {
   dispatch(getFarmvisitsStart());
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch("http://localhost:5000/farmvisits", {
+    const response = await fetch("https://dorfville.cyclic.app/farmvisits", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -83,12 +83,15 @@ export const fetchFarmvisit = (visitid) => async (dispatch) => {
     dispatch(getFarmvisitsStart());
     const token = localStorage.getItem("mktoken");
     try {
-      const response = await fetch(`http://localhost:5000/posts/${visitid}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://dorfville.cyclic.app/posts/${visitid}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response.status === 500) throw new Error("Server error");
       const posts = await response.json();
       dispatch(getFarmvisitsSuccess(posts));
@@ -109,7 +112,7 @@ export const addFarmvisit = (data) => async (dispatch) => {
   formData.append("body", data["body"]);
   formData.append("image", data["image"]);
   try {
-    const response = await fetch(`http://localhost:5000/posts`, {
+    const response = await fetch(`https://dorfville.cyclic.app/posts`, {
       method: "POST",
       body: formData,
       headers: {
@@ -130,7 +133,7 @@ export const deleteFarmvisit = (visitid) => async (dispatch) => {
   const token = localStorage.getItem("mktoken");
   try {
     const response = await fetch(
-      `http://localhost:5000/farmvisits/${visitid}`,
+      `https://dorfville.cyclic.app/farmvisits/${visitid}`,
       {
         method: "DELETE",
         headers: {

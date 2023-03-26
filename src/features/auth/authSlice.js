@@ -59,7 +59,7 @@ export const login = (credentials) => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
   try {
-    const response = await fetch(`http://localhost:5000/auth/logout`, {
+    await fetch(`http://localhost:5000/auth/logout`, {
       headers: {
         "Content-Type": "application/json",
       },

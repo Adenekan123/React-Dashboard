@@ -1,7 +1,4 @@
 import "./App.css";
-
-import "react-toastify/dist/ReactToastify.css";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Protected from "./pages/Protected";

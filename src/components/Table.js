@@ -13,7 +13,7 @@ const Table = ({ data, headings }) => {
       </thead>
       <tbody className="capitalize text-center">
         {data.map((item, index) => (
-          <TableItem key={item.id} index={index + 1} {...item} />
+          <TableItem key={item._id} index={index + 1} {...item} />
         ))}
       </tbody>
     </table>

@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Users from "../../users";
 
 const initialState = {
-  users: Users,
+  users: [],
   totalRegistered: 0,
   totalSuspended: 0,
   totalDailyExp: 0,
@@ -16,12 +15,18 @@ const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    toggleSuspendUser: (state, { payload }) => {
-      const userIndex = state.users.findIndex(
-        (user) => user.id === payload.userid
-      );
-      state.users[userIndex].suspended = !state.users[userIndex].suspended;
+    getUsersStart(state) {
+      state.isLoading = true;
     },
+    getUsersSuccess(state, action) {
+      state.isLoading = false;
+      state.users = action.payload;
+    },
+    getUsersFailure(state) {
+      state.isLoading = false;
+      state.users = [];
+    },
+
     calculateTotal: (state, { payload }) => {
       let totalAmount = 0;
       state.users.forEach((user) => (totalAmount += user[payload.field]));
@@ -33,7 +38,31 @@ const usersSlice = createSlice({
   },
 });
 
-export const { toggleSuspendUser, calculateTotal, totalUsers } =
-  usersSlice.actions;
+export const {
+  getUsersStart,
+  getUsersSuccess,
+  getUsersFailure,
+  calculateTotal,
+  totalUsers,
+} = usersSlice.actions;
+
+export const getUsers = () => async (dispatch) => {
+  dispatch(getUsersStart());
+  const token = localStorage.getItem("mktoken");
+  try {
+    const response = await fetch("http://localhost:5000/api/users", {
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    const users = await response.json();
+    dispatch(getUsersSuccess(users));
+  } catch (e) {
+    console.log(e);
+    dispatch(getUsersFailure());
+  }
+};
 
 export default usersSlice.reducer;

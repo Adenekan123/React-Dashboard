@@ -5,6 +5,7 @@ import logo from "../logo.svg";
 
 export const Header = () => {
   const dispatch = useDispatch();
+
   return (
     <header className=" bg-white">
       <div className="grid grid-cols-12 items-center px-4 lg:px-8 py-5 h-full">

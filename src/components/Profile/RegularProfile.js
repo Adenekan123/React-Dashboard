@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const RegularProfile = ({ component: Component, userid }) => {
   const { users } = useSelector((store) => store.users);
 
-  const person = users.find((user) => user.id === userid);
+  const person = users.find((user) => user._id === userid);
 
   return <Component {...person} />;
 };

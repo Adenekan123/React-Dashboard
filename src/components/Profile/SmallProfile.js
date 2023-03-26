@@ -1,6 +1,7 @@
 import React from "react";
 const SmallProfile = ({
-  name,
+  firstname,
+  lastname,
   age,
   title,
   email,
@@ -14,12 +15,12 @@ const SmallProfile = ({
       <tbody className="capitalize text-left">
         <tr className="border-b">
           <th>Name:</th>
-          <td>{name}</td>
+          <td>{firstname + lastname}</td>
         </tr>
-        <tr className="border-b">
+        {/* <tr className="border-b">
           <th>Age:</th>
           <td>{age}</td>
-        </tr>
+        </tr> */}
         <tr className="border-b">
           <th>Title:</th>
           <td>{title}</td>

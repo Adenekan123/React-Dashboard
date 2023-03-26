@@ -1,25 +1,85 @@
 import "./App.css";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+
+import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Protected from "./pages/Protected";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Users from "./pages/Users";
 import Profile from "./pages/Profile";
-import Modal from "./components/Modal";
+
+import Createpost from "./pages/createpost";
+import Editpost from "./pages/editpost";
+import Posts from "./pages/posts";
+import Farmvisits from "./pages/farmvisits";
+import Careers from "./pages/careers";
 
 function App() {
-  const [modalContent, setModalContent] = useState("");
-  const { isOpen } = useSelector((store) => store.modal);
   return (
     <>
-      {isOpen && <Modal> {modalContent} </Modal>}
       <Router>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/"
+            element={
+              <Protected>
+                <Dashboard />
+              </Protected>
+            }
+          />
+          <Route
+            path="/createpost"
+            element={
+              <Protected>
+                <Createpost />
+              </Protected>
+            }
+          />
+          <Route
+            path="/editpost/:id"
+            element={
+              <Protected>
+                <Editpost />
+              </Protected>
+            }
+          />
+          <Route
+            path="/posts"
+            element={
+              <Protected>
+                <Posts />
+              </Protected>
+            }
+          />
+          <Route
+            path="/farmvisits"
+            element={
+              <Protected>
+                <Farmvisits />
+              </Protected>
+            }
+          />
+          <Route
+            path="/careers"
+            element={
+              <Protected>
+                <Careers />
+              </Protected>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <Profile />
+              </Protected>
+            }
+          />
         </Routes>
       </Router>
     </>

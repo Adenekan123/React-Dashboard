@@ -1,4 +1,0 @@
-[[headers]]
-  for = "https://dorfville.cyclic.app"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"

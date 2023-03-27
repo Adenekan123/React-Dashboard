@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[[redirects]]
+  from = "https://dorfville.cyclic.app"
+  to = "https://dorfville.cyclic.app/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*", Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept"}
+
+[[headers]]
+  for = "https://dorfville.cyclic.app"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

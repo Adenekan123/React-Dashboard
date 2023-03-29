@@ -22,7 +22,7 @@ const Dashboard = () => {
   const { careerCount, postCount, farmVisitCount } = counts;
 
   useEffect(() => {
-    fetch("https://dorfville.cyclic.app/dashboard/counts")
+    fetch(`${process.env.REACT_APP_API_URL}/dashboard/counts`)
       .then((response) => response.json())
       .then(setCounts)
       .catch((error) => console.error(error));

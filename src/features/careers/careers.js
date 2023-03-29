@@ -1,4 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import dotenv from "dotenv";
+
+// dotenv.config();
 
 const initialState = {
   careers: [],
@@ -49,7 +52,7 @@ export const fetchCareers = () => async (dispatch) => {
   dispatch(getCareersStart());
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch("https://dorfville.cyclic.app/career", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/career`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -68,14 +71,13 @@ export const deleteCareer = (careerid) => async (dispatch) => {
   const token = localStorage.getItem("mktoken");
   try {
     const response = await fetch(
-      `https://dorfville.cyclic.app/careers/${careerid}`,
+      `${process.env.REACT_APP_API_URL}/careers/${careerid}`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        credentials: "include",
       }
     );
     const result = await response.json();

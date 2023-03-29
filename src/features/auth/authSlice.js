@@ -42,14 +42,17 @@ export const { loginStart, loginSuccess, loginFailure, logoutSuccess } =
 export const login = (credentials) => async (dispatch) => {
   dispatch(loginStart());
   try {
-    const response = await fetch(`https://dorfville.cyclic.app/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(credentials),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(credentials),
+      }
+    );
     const result = await response.json();
     dispatch(loginSuccess(result));
   } catch (e) {
@@ -59,11 +62,10 @@ export const login = (credentials) => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
   try {
-    await fetch(`https://dorfville.cyclic.app/auth/logout`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
     dispatch(logoutSuccess());
   } catch (e) {

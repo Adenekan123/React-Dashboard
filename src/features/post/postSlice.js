@@ -35,6 +35,7 @@ const postSlice = createSlice({
       state.isLoading = false;
       state.posts = [...state.posts, action.payload];
       state.success = true;
+      alert("Post Created successfully");
     },
     addPostsFailure(state, action) {
       state.isLoading = false;
@@ -49,6 +50,7 @@ const postSlice = createSlice({
       if (postIndex !== -1) {
         state.posts.splice(postIndex, 1, updatedPost);
         state.success = true;
+        alert("Post updated successfully");
       }
     },
     deletePostSuccess(state, action) {
@@ -79,10 +81,11 @@ export const {
 } = postSlice.actions;
 
 export const fetchPosts = () => async (dispatch) => {
+  console.log("process", process.env.REACT_APP_API_URL);
   dispatch(getPostsStart());
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch("https://dorfville.cyclic.app/posts", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -102,7 +105,7 @@ export const fetchPost = (postid) => async (dispatch) => {
     const token = localStorage.getItem("mktoken");
     try {
       const response = await fetch(
-        `https://dorfville.cyclic.app/posts/${postid}`,
+        `${process.env.REACT_APP_API_URL}/posts/${postid}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -130,7 +133,7 @@ export const addPost = (data) => async (dispatch) => {
   formData.append("body", data["body"]);
   formData.append("image", data["image"]);
   try {
-    const response = await fetch(`https://dorfville.cyclic.app/posts`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
       method: "POST",
       body: formData,
       headers: {
@@ -148,17 +151,20 @@ export const addPost = (data) => async (dispatch) => {
 };
 export const updatePost = (postId, updatedData) => async (dispatch) => {
   const token = localStorage.getItem("mktoken");
+
+  const formData = new FormData();
+  formData.append("title", updatedData["title"]);
+  formData.append("body", updatedData["body"]);
+  formData.append("image", updatedData["image"]);
   try {
     const response = await fetch(
-      `https://dorfville.cyclic.app/posts/${postId}`,
+      `${process.env.REACT_APP_API_URL}/posts/${postId}`,
       {
         method: "POST",
-        body: JSON.stringify(updatedData),
+        body: formData,
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        credentials: "include",
       }
     );
     const result = await response.json();
@@ -172,7 +178,7 @@ export const deletePost = (postId) => async (dispatch) => {
   const token = localStorage.getItem("mktoken");
   try {
     const response = await fetch(
-      `https://dorfville.cyclic.app/posts/${postId}`,
+      `${process.env.REACT_APP_API_URL}/posts/${postId}`,
       {
         method: "DELETE",
         headers: {

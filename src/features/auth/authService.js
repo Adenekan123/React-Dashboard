@@ -1,4 +1,4 @@
-const URL = "https://dorfville.cyclic.app/auth";
+const URL = `${process.env.REACT_APP_API_URL}/auth`;
 
 //register
 const register = async (user) => {

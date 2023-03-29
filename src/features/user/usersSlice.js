@@ -50,8 +50,7 @@ export const getUsers = () => async (dispatch) => {
   dispatch(getUsersStart());
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch("https://dorfville.cyclic.app/api/users", {
-      credentials: "include",
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users`, {
       headers: {
         "Content-type": "application/json",
         Authorization: "Bearer " + token,

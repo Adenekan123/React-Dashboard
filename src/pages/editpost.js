@@ -12,6 +12,7 @@ import { Container } from "../components/Container";
 const initialState = {
   title: "",
   body: "",
+  image: "",
 };
 
 const Editpost = () => {
@@ -26,6 +27,10 @@ const Editpost = () => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleFileUpload = (event) => {
+    setInputs({ ...inputs, image: event.target.files[0] });
   };
 
   const onSubmit = function (e) {
@@ -98,6 +103,20 @@ const Editpost = () => {
                         name="body"
                         value={inputs.body}
                         onChange={updateinputs}></textarea>
+                    </div>
+                    <div className=" mb-10 col-span-12">
+                      <label
+                        htmlFor="image"
+                        className="block mb-3 font-semibold">
+                        Picture:
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className=" w-full border rounded px-6 py-4"
+                        name="image"
+                        onChange={handleFileUpload}
+                      />
                     </div>
 
                     <div className="text-center col-span-12">

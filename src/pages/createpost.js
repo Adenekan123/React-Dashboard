@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, resetSuccess } from "../features/post/postSlice";
+import { addPost } from "../features/post/postSlice";
 
 import { Header } from "../components/Header";
 import { Aside } from "../components/Aside";
@@ -15,7 +15,7 @@ const initialState = {
 
 const Createpost = () => {
   const dispatch = useDispatch();
-  const { isLoading, error, success } = useSelector((store) => store.posts);
+  const { isLoading, error } = useSelector((store) => store.posts);
 
   const [inputs, setInputs] = useState(initialState);
 
@@ -38,11 +38,6 @@ const Createpost = () => {
     dispatch(addPost({ ...inputs }));
   };
 
-  useEffect(() => {
-    if (success) alert("Post created successfully!");
-    return () => dispatch(resetSuccess());
-  }, [success, dispatch]);
-
   return (
     <>
       <Header />
@@ -50,7 +45,6 @@ const Createpost = () => {
         <Aside />
         <Main>
           {isLoading ? <h1>Creating...</h1> : ""}
-          {success ? <h1>Post created successfully!</h1> : ""}
           <div className=" w-100 bg-secondary flex justify-center items-center p-4 md:p-0">
             <div className=" w-full">
               <div className="bg-white rounded shadow">

@@ -64,12 +64,15 @@ export const fetchFarmvisits = () => async (dispatch) => {
   dispatch(getFarmvisitsStart());
   const token = localStorage.getItem("mktoken");
   try {
-    const response = await fetch("https://dorfville.cyclic.app/farmvisits", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/farmvisits`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (response.status === 500) throw new Error("Server error");
     const posts = await response.json();
     dispatch(getFarmvisitsSuccess(posts));
@@ -84,7 +87,7 @@ export const fetchFarmvisit = (visitid) => async (dispatch) => {
     const token = localStorage.getItem("mktoken");
     try {
       const response = await fetch(
-        `https://dorfville.cyclic.app/posts/${visitid}`,
+        `${process.env.REACT_APP_API_URL}/posts/${visitid}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -112,7 +115,7 @@ export const addFarmvisit = (data) => async (dispatch) => {
   formData.append("body", data["body"]);
   formData.append("image", data["image"]);
   try {
-    const response = await fetch(`https://dorfville.cyclic.app/posts`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
       method: "POST",
       body: formData,
       headers: {
@@ -133,14 +136,13 @@ export const deleteFarmvisit = (visitid) => async (dispatch) => {
   const token = localStorage.getItem("mktoken");
   try {
     const response = await fetch(
-      `https://dorfville.cyclic.app/farmvisits/${visitid}`,
+      `${process.env.REACT_APP_API_URL}/farmvisits/${visitid}`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        credentials: "include",
       }
     );
     const result = await response.json();

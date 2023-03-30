@@ -49,7 +49,6 @@ export const login = (credentials) => async (dispatch) => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
         body: JSON.stringify(credentials),
       }
     );

@@ -39,11 +39,12 @@ const Careers = () => {
                     <tr key={career._id}>
                       <th className="border py-2">{index}</th>
                       <td className="border py-2">
-                        <Link
-                          to={`${career.cv}`}
-                          target="_blank">
+                        <button
+                        type="button"
+                          onClick={window.open(`${career.cv}`)}
+                          >
                           View
-                        </Link>
+                        </button>
                       </td>
                       <td>
                         <button onClick={() => onDelete(career._id)}>

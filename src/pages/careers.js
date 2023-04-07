@@ -17,6 +17,9 @@ const Careers = () => {
     dispatch(deleteCareer(careerid));
   };
 
+  const goOut = (url) => {
+    window.open(url);
+  };
   useEffect(() => {
     dispatch(fetchCareers());
   }, [dispatch]);
@@ -37,9 +40,7 @@ const Careers = () => {
                     <tr key={career._id}>
                       <th className="border py-2">{index}</th>
                       <td className="border py-2">
-                        <button
-                        type="button"
-                          onClick={window.open(`${career.cv}`)}
+                        <button type="button" onClick={()=> goOut(`${career.cv}`)}
                           >
                           View
                         </button>

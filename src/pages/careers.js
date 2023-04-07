@@ -40,7 +40,7 @@ const Careers = () => {
                       <th className="border py-2">{index}</th>
                       <td className="border py-2">
                         <Link
-                          to={`${new URL("file", career.cv).href}`}
+                          to={`${career.cv}`}
                           target="_blank">
                           View
                         </Link>

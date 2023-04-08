@@ -52,11 +52,14 @@ export const login = (credentials) => async (dispatch) => {
         body: JSON.stringify(credentials),
       }
     );
-    const result = await response.json();
-    dispatch(loginSuccess(result));
+    if(response.ok){
+      const result = await response.json();
+      dispatch(loginSuccess(result));
+    }else throw new Error("Incorrect Username or password")
+    
   } catch (e) {
     console.log(e);
-    dispatch(loginFailure(e));
+    dispatch(loginFailure(e.message));
   }
 };
 export const logout = () => async (dispatch) => {

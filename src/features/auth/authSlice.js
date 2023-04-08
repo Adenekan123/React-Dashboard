@@ -64,15 +64,15 @@ export const login = (credentials) => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
   try {
-    await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
+   const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    dispatch(logoutSuccess());
+    if(response.ok)dispatch(logoutSuccess());
+    else alert('Unable to logout, please try again or contact the developer')
   } catch (e) {
     console.log(e);
-    // dispatch(loginFailure(e));
   }
 };
 

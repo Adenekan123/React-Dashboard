@@ -17,9 +17,6 @@ const Careers = () => {
     dispatch(deleteCareer(careerid));
   };
 
-  const goOut = (url) => {
-    window.open(url);
-  };
   useEffect(() => {
     dispatch(fetchCareers());
   }, [dispatch]);

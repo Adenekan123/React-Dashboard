@@ -40,10 +40,9 @@ const Careers = () => {
                     <tr key={career._id}>
                       <th className="border py-2">{index}</th>
                       <td className="border py-2">
-                        <button type="button" onClick={()=> goOut(`${career.cv}`)}
-                          >
+                        <a  href={`${career.cv}`} target="_blank" rel="noreferrer noopener">
                           View
-                        </button>
+                        </a>
                       </td>
                       <td>
                         <button onClick={() => onDelete(career._id)}>

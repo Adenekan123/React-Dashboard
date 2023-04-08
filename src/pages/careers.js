@@ -35,9 +35,9 @@ const Careers = () => {
                 <tbody>
                   {careers.map((career, index) => (
                     <tr key={career._id}>
-                      <th className="border py-2">{index}</th>
+                      <th className="border py-2">{index+1}</th>
                       <td className="border py-2">
-                        <a  href={`${career.cv}`} target="_blank" rel="noreferrer noopener">
+                        <a  href={`${career.cv}`} target="_blank" rel="noreferrer noopener" className="p-2">
                           View
                         </a>
                       </td>

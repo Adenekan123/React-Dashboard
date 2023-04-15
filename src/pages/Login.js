@@ -37,8 +37,6 @@ const Login = () => {
     dispatch(login({ ...inputs }));
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
-
   return (
     <div className="h-screen w-100 bg-secondary flex justify-center items-center p-4 md:p-0">
       <div className="w-96">
@@ -78,14 +76,11 @@ const Login = () => {
                 type="button"
                 className="bg-primary hover:bg-gray-700 px-6 py-3 capitalize rounded font-medium text-white"
                 onClick={onSubmit}>
-                Login
+                {isLoading ? 'Login in...': 'Login'}
               </button>
             </div>
             <div className="flex justify-between items-center mt-10 text-sm text-gray-500">
-              <Link to="#" className="hover:text-blue-700">
-                forgot password
-              </Link>
-              <Link to="#" className="hover:text-blue-700">
+              <Link to="/register" className="hover:text-blue-700">
                 create a new account
               </Link>
             </div>

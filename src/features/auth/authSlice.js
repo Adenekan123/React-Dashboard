@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { API } from "./authService";
+import { createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   isAuthenticated: false,
@@ -10,7 +9,6 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-
   reducers: {
     loginStart(state) {
       state.isLoading = true;
@@ -52,11 +50,10 @@ export const login = (credentials) => async (dispatch) => {
         body: JSON.stringify(credentials),
       }
     );
-    if(response.ok){
+    if (response.ok) {
       const result = await response.json();
       dispatch(loginSuccess(result));
-    }else throw new Error("Incorrect Username or password")
-    
+    } else throw new Error("Incorrect Username or password");
   } catch (e) {
     console.log(e);
     dispatch(loginFailure(e.message));
@@ -64,36 +61,44 @@ export const login = (credentials) => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
   try {
-   const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if(response.ok)dispatch(logoutSuccess());
-    else alert('Unable to logout, please try again or contact the developer')
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/auth/logout`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) dispatch(logoutSuccess());
+    else alert("Unable to logout, please try again or contact the developer");
   } catch (e) {
     console.log(e);
   }
 };
 
-// export const logout = createAsyncThunk("/auth/logout", async () => {
-//   try {
-//     await API.logout();
-//   } catch (e) {
-//     console.log("Error logging out");
-//   }
-// });
-
-export const register = createAsyncThunk(
-  "/auth/register",
-  async (user, thunkAPI) => {
-    try {
-      return await API.register(user);
-    } catch (e) {
-      thunkAPI.rejectWithValue(e);
-    }
+export const registerAsync = (body) => async (dispatch) => {
+  dispatch(loginStart());
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/auth/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if(response.ok){
+      const result = await response.json();
+      dispatch(loginSuccess(result));
+    }else throw new Error("Username taken")
+    
+  } catch (e) {
+    dispatch(loginFailure(e.message));
   }
-);
+};
+
 
 export const selectToken = (state) => state.auth.token;
 

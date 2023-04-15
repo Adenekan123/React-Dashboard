@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register } from "../features/auth/authSlice";
+import { registerAsync } from "../features/auth/authSlice";
 
 const initialState = {
   firstname: "",
@@ -15,14 +15,9 @@ const initialState = {
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, error, loggedin, user } = useSelector(
+  const { isLoading, error, isAuthenticated } = useSelector(
     (store) => store.auth
   );
-
-  useEffect(() => {
-    if (loggedin && user) navigate("/");
-    if (error) alert("Unable to register");
-  }, [loggedin, user, error, navigate]);
 
   const [inputs, setInputs] = useState(initialState);
   // const [error, setError] = useState("");
@@ -44,9 +39,13 @@ const Register = () => {
       inputs.lastname === ""
     )
       return alert("Please enter all fields");
-    dispatch(register({ ...inputs }));
+    dispatch(registerAsync({ ...inputs }));
   };
-  if (isLoading) return <h1>Loading...</h1>;
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+    if (error) alert(error);
+  }, [isAuthenticated, error, navigate]);
   return (
     <div className="md:h-screen w-100 bg-secondary flex justify-center items-center p-4 md:p-0">
       <div className=" w-full md:w-1/3">
@@ -127,14 +126,15 @@ const Register = () => {
               <button
                 className="bg-primary hover:bg-gray-700 px-6 py-3 capitalize rounded font-medium text-white"
                 onClick={onSubmit}>
-                register
+                  {isLoading ? "Creating Account...":"Register"}
+
               </button>
             </div>
             <div className="col-span-12 flex justify-center items-center mt-6 text-sm text-gray-500">
               <span>
                 Already registered ?
                 <Link to="/login" className="hover:text-blue-700 ml-2">
-                  Login
+                  Login here
                 </Link>
               </span>
             </div>

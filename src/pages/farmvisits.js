@@ -39,7 +39,7 @@ const Farmvisits = () => {
                     key={farmvisit.createdAt}>
                     <div className="bg-white">
                       <div className="p-3">
-                        <h3>Phone: {farmvisit.phone}</h3>
+                        <h3>Date: {farmvisit.date}</h3>
                         <h3>Email: {farmvisit.email}</h3>
                         <p className="mt-3">{farmvisit.body}</p>
                       </div>

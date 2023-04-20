@@ -22,7 +22,7 @@ const Farmvisits = () => {
 
   const formatDate = (mongoDate) =>{
     const date = new Date(mongoDate);
-    return `${date.getMonth()}-${date.getFullYear()}  ${date.toLocaleTimeString()}`
+    return `${date.toLocaleDateString()}   ${date.toLocaleTimeString()}`
   }
 
   useEffect(() => {

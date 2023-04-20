@@ -20,6 +20,11 @@ const Farmvisits = () => {
     dispatch(deleteFarmvisit(postid));
   };
 
+  const formatDate = (mongoDate) =>{
+    const date = new Date(mongoDate);
+    return `${date.getMonth()}-${date.getFullYear()}  ${date.toLocaleTimeString()}`
+  }
+
   useEffect(() => {
     dispatch(fetchFarmvisits());
   }, [dispatch]);
@@ -39,7 +44,7 @@ const Farmvisits = () => {
                     key={farmvisit.createdAt}>
                     <div className="bg-white">
                       <div className="p-3">
-                        <h3>Date: {farmvisit.date}</h3>
+                        <h3>Date: {formatDate(farmvisit.date)}</h3>
                         <h3>Email: {farmvisit.email}</h3>
                         <p className="mt-3">{farmvisit.body}</p>
                       </div>

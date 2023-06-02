@@ -131,8 +131,10 @@ export const addPost = (data) => async (dispatch) => {
   const formData = new FormData();
   formData.append("title", data["title"]);
   formData.append("body", data["body"]);
-  formData.append("image", data["image"]);
-  try {
+  data["image"] && formData.append("image", data["image"]);
+  data["pdf"] && formData.append("pdf", data["pdf"]);
+
+    try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
       method: "POST",
       body: formData,
@@ -155,7 +157,8 @@ export const updatePost = (postId, updatedData) => async (dispatch) => {
   const formData = new FormData();
   formData.append("title", updatedData["title"]);
   formData.append("body", updatedData["body"]);
-  formData.append("image", updatedData["image"]);
+  updatedData["image"] && formData.append("image", updatedData["image"]);
+  updatedData['pdf'] &&  formData.append("pdf", updatedData["pdf"]);
   try {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/posts/${postId}`,

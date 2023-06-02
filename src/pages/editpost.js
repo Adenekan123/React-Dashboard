@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 import { updatePost, fetchPost } from "../features/post/postSlice";
 
 import { Header } from "../components/Header";
@@ -13,6 +16,7 @@ const initialState = {
   title: "",
   body: "",
   image: "",
+  pdf: "",
 };
 
 const Editpost = () => {
@@ -30,7 +34,11 @@ const Editpost = () => {
   };
 
   const handleFileUpload = (event) => {
-    setInputs({ ...inputs, image: event.target.files[0] });
+    const { name, files } = event.target;
+    setInputs({ ...inputs, [name]: files[0] });
+  };
+  const updateBody = function (value) {
+    setInputs((prev) => ({ ...prev, body: value }));
   };
 
   const onSubmit = function (e) {
@@ -39,6 +47,7 @@ const Editpost = () => {
       return alert("Please enter all fields");
     dispatch(updatePost(id, { ...inputs }));
   };
+  
 
   useEffect(() => {
     dispatch(fetchPost(id));
@@ -72,11 +81,12 @@ const Editpost = () => {
                       Update Post
                     </h2>
                   </div>
-                  <div className="md:grid grid-cols-12 gap-3 card-body p-6">
+                  <form onSubmit={onSubmit} className="md:grid grid-cols-12 gap-3 card-body p-6">
                     <div className="mb-6 col-span-12">
                       <label
                         htmlFor="username"
-                        className="block mb-3 font-semibold">
+                        className="block mb-3 font-semibold"
+                      >
                         Title:
                       </label>
                       <input
@@ -93,21 +103,17 @@ const Editpost = () => {
                     <div className=" mb-10 col-span-12">
                       <label
                         htmlFor="password"
-                        className="block mb-3 font-semibold">
+                        className="block mb-3 font-semibold"
+                      >
                         Body:
                       </label>
-                      <textarea
-                        rows="8"
-                        className=" w-full border rounded px-6 py-4"
-                        placeholder="Enter content"
-                        name="body"
-                        value={inputs.body}
-                        onChange={updateinputs}></textarea>
+                      <ReactQuill value={inputs.body} onChange={updateBody} />
                     </div>
                     <div className=" mb-10 col-span-12">
                       <label
                         htmlFor="image"
-                        className="block mb-3 font-semibold">
+                        className="block mb-3 font-semibold"
+                      >
                         Picture:
                       </label>
                       <input
@@ -118,15 +124,27 @@ const Editpost = () => {
                         onChange={handleFileUpload}
                       />
                     </div>
-
+                    <div className=" mb-10 col-span-12">
+                    <label htmlFor="image" className="block mb-3 font-semibold">
+                      PDF:
+                    </label>
+                    <input
+                      type="file"
+                      accept="application/pdf"
+                      className=" w-full border rounded px-6 py-4"
+                      name="pdf"
+                      onChange={handleFileUpload}
+                    />
+                  </div>
                     <div className="text-center col-span-12">
                       <button
                         className="bg-primary hover:bg-gray-700 px-6 py-3 capitalize rounded font-medium text-white"
-                        onClick={onSubmit}>
+                        type="submit"
+                      >
                         Update
                       </button>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

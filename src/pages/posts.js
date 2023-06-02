@@ -40,7 +40,7 @@ const Posts = () => {
                       {post.image && (
                         <img
                           className="w-full h-40 object-cover"
-                          src={`data:${post.image.contentType};base64,${post.image.data}`}
+                          src={`${post.image.url}`}
                           alt={post.title}
                         />
                       )}

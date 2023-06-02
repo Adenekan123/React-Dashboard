@@ -55,7 +55,7 @@ const Editpost = () => {
 
   useEffect(() => {
     if (posts.length) {
-      setInputs(posts[0]);
+      setInputs({...posts[0],pdf:'',image:''});
     }
   }, [posts]);
 

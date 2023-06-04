@@ -23,10 +23,9 @@ const Createpost = () => {
   const [inputs, setInputs] = useState(initialState);
 
   const handleFileUpload = (event) => {
-    const {name,files} = event.target
-    setInputs({ ...inputs, [name]:files[0] });
+    const { name, files } = event.target;
+    setInputs({ ...inputs, [name]: files[0] });
   };
- 
 
   const updateinputs = function (e) {
     setInputs({
@@ -35,9 +34,9 @@ const Createpost = () => {
     });
   };
 
-  const updateBody = function (value){
-    setInputs(prev=>({...prev,body:value}))
-  }
+  const updateBody = function (value) {
+    setInputs((prev) => ({ ...prev, body: value }));
+  };
 
   const onSubmit = async function (e) {
     e.preventDefault();
@@ -52,7 +51,6 @@ const Createpost = () => {
       <Container>
         <Aside />
         <Main>
-          {isLoading ? <h1>Creating...</h1> : ""}
           <div className=" w-100 bg-secondary flex justify-center items-center p-4 md:p-0">
             <div className=" w-full">
               <div className="bg-white rounded shadow">
@@ -66,7 +64,10 @@ const Createpost = () => {
                     Create New Post
                   </h2>
                 </div>
-                <form onSubmit={onSubmit} className="md:grid grid-cols-12 gap-3 card-body p-6">
+                <form
+                  onSubmit={onSubmit}
+                  className="md:grid grid-cols-12 gap-3 card-body p-6"
+                >
                   <div className="mb-6 col-span-12">
                     <label
                       htmlFor="username"
@@ -124,7 +125,7 @@ const Createpost = () => {
                       className="bg-primary hover:bg-gray-700 px-6 py-3 capitalize rounded font-medium text-white"
                       type="submit"
                     >
-                      Create
+                      {isLoading ? "Creating...": "Create"}
                     </button>
                   </div>
                 </form>

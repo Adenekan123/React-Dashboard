@@ -141,7 +141,7 @@ const Editpost = () => {
                         className="bg-primary hover:bg-gray-700 px-6 py-3 capitalize rounded font-medium text-white"
                         type="submit"
                       >
-                        Update
+                        {isLoading ? 'Updating...':'Update'}
                       </button>
                     </div>
                   </form>
